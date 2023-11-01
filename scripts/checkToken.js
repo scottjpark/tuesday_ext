@@ -1,11 +1,4 @@
 const FONTFAMILY = 'TwitterChirp, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif';
-const BGCOLOR = document.body.style.backgroundColor;
-let FONTCOLOR;
-if (BGCOLOR === 'rgb(255, 255, 255)') {
-  FONTCOLOR = 'black';
-} else {
-  FONTCOLOR = 'white';
-}
 
 const checkAccessToken = () => {
   const accessToken = localStorage.getItem('curation_access');
@@ -76,9 +69,10 @@ const addLoginFields = () => {
   const loginBox = document.createElement('form');
   loginBox.id = 'curation-login';
   loginBox.style.margin = '10px 0 0 0';
-  loginBox.style.padding = '8px';
-  loginBox.style.width = '80%';
-  loginBox.style.border = `1px solid ${FONTCOLOR}`;
+  loginBox.style.padding = '5px';
+  loginBox.style.width = '206px';
+  loginBox.style.border = '1px solid #5C6E7E';
+  loginBox.style.borderRadius = '5px';
   loginBox.style.display = 'flex';
   loginBox.style.flexDirection = 'column';
   loginBox.style.alignItems = 'center';
@@ -91,8 +85,10 @@ const addLoginFields = () => {
   usernameContainer.style.width = '100%';
   usernameContainer.style.display = 'flex';
   usernameContainer.style.justifyContent = 'space-between';
+  usernameContainer.style.alignItems = 'center';
 
   const usernameText = document.createElement('p');
+  usernameText.style.fontSize = '0.8em';
   usernameText.style.margin = '3px 0px 2px 5px';
   usernameText.style.width = '40%';
   usernameText.innerText = 'Username: ';
@@ -110,8 +106,10 @@ const addLoginFields = () => {
   passwordContainer.style.width = '100%';
   passwordContainer.style.display = 'flex';
   passwordContainer.style.justifyContent = 'space-between';
+  passwordContainer.style.alignItems = 'center';
 
   const passwordText = document.createElement('p');
+  passwordText.style.fontSize = '0.8em';
   passwordText.style.margin = '3px 0px 2px 5px';
   passwordText.style.width = '40%';
   passwordText.innerText = 'Password: ';

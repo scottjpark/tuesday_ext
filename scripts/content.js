@@ -24,8 +24,8 @@ const addInfoBox = (article, articleImagesFiltered) => {
   formBox.style.alignItems = 'flex-start';
   formBox.style.padding = '14px';
   formBox.style.margin = '3px 16px 16px 68px';
-  formBox.style.border = `1px solid ${fontColor}`;
-  formBox.style.borderRadius = '0.5em';
+  formBox.style.border = '1px solid #5C6E7E';
+  formBox.style.borderRadius = '16px';
 
   article.parentNode.appendChild(formBox);
 
