@@ -1,9 +1,11 @@
 const addInfoBox = (article, articleImagesFiltered) => {
   // Format data and tags
-  const artist = article.querySelectorAll('span')[3].innerText;
-  const displayName = article.querySelectorAll('span')[0].innerText;
+  const userNameField = article.querySelectorAll('div[data-testid="User-Name"]')[0];
+  const artist = userNameField.querySelectorAll('span')[3].innerText;
+  const displayName = userNameField.querySelectorAll('span')[0].innerText;
   const textBody = article.innerText;
   const hashTags = textBody.match(/#(\w+)/g) || [];
+  const tweetURL = article.querySelectorAll('a')[3].href;
 
   // Format and append box
   const bgColor = document.body.style.backgroundColor;
@@ -88,7 +90,9 @@ const addInfoBox = (article, articleImagesFiltered) => {
   const data = {
     urls: imgURLs,
     tags: hashTags,
-    names: [artist.replace('@', ''), displayName],
+    name: artist.replace('@', ''),
+    displayName,
+    tweetURL,
   };
 
   const sendToCurator = () => {
