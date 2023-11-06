@@ -139,7 +139,7 @@ const addConfigButton = () => {
 
       const updatePopup = (e) => {
         e.preventDefault();
-        const existingFormBoxes = document.querySelectorAll('form.tuesday-config');
+        const existingFormBoxes = article.querySelectorAll('form.tuesday-config');
         if (!(existingFormBoxes.length > 0)) {
           addInfoBox(article, articleImagesFiltered);
         }

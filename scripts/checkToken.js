@@ -1,8 +1,25 @@
 const FONTFAMILY = 'TwitterChirp, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif';
 
-const checkAccessToken = () => {
+const checkAccessToken = async () => {
   const accessToken = localStorage.getItem('curation_access');
-  return !!accessToken;
+  if (!accessToken) return false;
+
+  const url = 'http://localhost:8000/api/users/token/verify/';
+  const data = {
+    token: accessToken,
+  };
+
+  const tokenStatus = await $.ajax({
+    method: 'POST',
+    url,
+    data,
+  }).fail('caught');
+
+  const responseLength = Object.keys(tokenStatus).length;
+  if (responseLength === 0) {
+    return true;
+  }
+  return false;
 };
 
 const removeLoginFields = () => {
@@ -137,12 +154,15 @@ const addLoginFields = () => {
   loginBox.appendChild(loginSubmitButton);
 };
 
-const intervalId = setInterval(() => {
-  if (document.readyState === 'complete') {
+const intervalId = setInterval(async () => {
+  const tokenStatus = await checkAccessToken()
+    .then((res) => res)
+    .catch(() => false);
+  if (document.readyState === 'complete' && typeof tokenStatus === 'boolean') {
     clearInterval(intervalId);
-    setStatusFields(checkAccessToken());
-    if (!checkAccessToken()) {
+    setStatusFields(tokenStatus);
+    if (!tokenStatus) {
       addLoginFields();
     }
   }
-}, 500);
+}, 1000);
