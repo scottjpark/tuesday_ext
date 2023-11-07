@@ -105,16 +105,16 @@ const addInfoBox = (article, articleImagesFiltered) => {
 
   const sendToCurator = () => {
     // Remove the button and replace with loading bar to prevent button spam
-    const clickedButton = formBox.querySelector('.curation-button')
-    clickedButton.remove()
+    const clickedButton = formBox.querySelector('.curation-button');
+    clickedButton.remove();
     const sendImg = chrome.runtime.getURL('images/loader.webp'); // eslint-disable-line
-    const loader = document.createElement('img')
-    loader.src = sendImg
-    loader.style.width = '20px'
+    const loader = document.createElement('img');
+    loader.src = sendImg;
+    loader.style.width = '20px';
     formBox.appendChild(loader);
 
     const accessToken = localStorage.getItem('curation_access');
-    const url = 'http://localhost:8000/api/curation/save_twitter/';
+    const url = 'https://tuesday-production.up.railway.app/pi/curation/save_twitter/';
     fetch(url, {
       method: 'POST',
       headers: {
@@ -125,21 +125,21 @@ const addInfoBox = (article, articleImagesFiltered) => {
     })
       .then((response) => response.json())
       .then((returnData) => {
-        formBox.remove()
-        article.parentNode.appendChild(statusBox)
+        formBox.remove();
+        article.parentNode.appendChild(statusBox);
         statusBox.style.color = 'rgb(50, 205, 50)';
-        statusBox.innerText = returnData
+        statusBox.innerText = returnData;
       })
       .catch((error) => {
-        formBox.remove()
-        article.parentNode.appendChild(statusBox)
+        formBox.remove();
+        article.parentNode.appendChild(statusBox);
         statusBox.style.color = 'rgb(255, 0, 0)';
-        statusBox.innerText = `Something went wrong: ${error}`
+        statusBox.innerText = `Something went wrong: ${error}`;
       });
   };
 
   const sendButton = document.createElement('div');
-  sendButton.className = 'curation-button'
+  sendButton.className = 'curation-button';
   sendButton.style.cursor = 'pointer';
   sendButton.innerText = 'Save';
   sendButton.style.fontSize = '0.8em';

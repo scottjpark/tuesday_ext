@@ -4,7 +4,7 @@ const checkAccessToken = async () => {
   const accessToken = localStorage.getItem('curation_access');
   if (!accessToken) return false;
 
-  const url = 'http://localhost:8000/api/users/token/verify/';
+  const url = 'https://tuesday-production.up.railway.app/api/users/token/verify/';
   const data = {
     token: accessToken,
   };
@@ -71,7 +71,7 @@ const addLoginFields = () => {
       password,
     };
 
-    const url = 'http://localhost:8000/api/users/token/';
+    const url = 'https://tuesday-production.up.railway.app/api/users/token/';
 
     $.post(url, userData).done((response) => {
       if (response.access) {
