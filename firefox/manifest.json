@@ -11,7 +11,6 @@
         "128": "images/icon.png"
     },
     "permissions": [
-        "*://localhost/*",
         "https://tuesday-production.up.railway.app/*"
     ],
     "content_security_policy": "sandbox allow-scripts allow-forms allow-popups allow-modals;script-src 'self' 'unsafe-eval'; object-src 'self';",
@@ -28,8 +27,8 @@
                 "scripts/jquery-3.7.1.min.js"
             ],
             "matches": [
-                "https://twitter.com/home*",
-                "https://x.com/home*"
+                "https://twitter.com/*",
+                "https://x.com/*"
             ],
             "run_at": "document_idle"
         }
