@@ -2,7 +2,7 @@
     "name": "Raphire's Curation",
     "version": "1.0.0",
     "description": "Saves Twitter to DB",
-    "manifest_version": 3,
+    "manifest_version": 2,
     "author": "Raphire",
     "icons": {
         "16": "images/icon.png",
@@ -10,24 +10,14 @@
         "48": "images/icon.png",
         "128": "images/icon.png"
     },
-    "host_permissions": [
-        "http://localhost:8000/*"
+    "permissions": [
+        "*://localhost/*"
     ],
-    "content_security_policy": {
-        "extension_pages": "script-src 'self'; object-src 'self';",
-        "sandbox": "sandbox allow-scripts allow-forms allow-popups allow-modals; script-src 'self' 'unsafe-inline' 'unsafe-eval'; child-src 'self';"
-    },
+    "content_security_policy": "sandbox allow-scripts allow-forms allow-popups allow-modals;script-src 'self' 'unsafe-eval'; object-src 'self';",
     "web_accessible_resources": [
-        {
-            "resources": [
-                "images/icon.png",
-                "images/share.png"
-            ],
-            "matches": [
-                "https://x.com/*",
-                "https://twitter.com/*"
-            ]
-        }
+        "images/icon.png",
+        "images/share.png",
+        "images/loader.webp"
     ],
     "content_scripts": [
         {

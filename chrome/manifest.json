@@ -21,7 +21,8 @@
         {
             "resources": [
                 "images/icon.png",
-                "images/share.png"
+                "images/share.png",
+                "images/loader.webp"
             ],
             "matches": [
                 "https://x.com/*",

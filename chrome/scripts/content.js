@@ -104,6 +104,15 @@ const addInfoBox = (article, articleImagesFiltered) => {
   };
 
   const sendToCurator = () => {
+    // Remove the button and replace with loading bar to prevent button spam
+    const clickedButton = formBox.querySelector('.curation-button')
+    clickedButton.remove()
+    const sendImg = chrome.runtime.getURL('images/loader.webp'); // eslint-disable-line
+    const loader = document.createElement('img')
+    loader.src = sendImg
+    loader.style.width = '20px'
+    formBox.appendChild(loader);
+
     const accessToken = localStorage.getItem('curation_access');
     const url = 'http://localhost:8000/api/curation/save_twitter/';
     fetch(url, {
@@ -130,8 +139,10 @@ const addInfoBox = (article, articleImagesFiltered) => {
   };
 
   const sendButton = document.createElement('div');
+  sendButton.className = 'curation-button'
   sendButton.style.cursor = 'pointer';
-  sendButton.innerText = 'Send';
+  sendButton.innerText = 'Save';
+  sendButton.style.fontSize = '0.8em';
   sendButton.onclick = sendToCurator;
   formBox.appendChild(sendButton);
 };
@@ -181,5 +192,5 @@ document.addEventListener('scroll', () => {
   if (timer !== null) {
     clearTimeout(timer);
   }
-  timer = setTimeout(() => { addConfigButton(); }, 200);
+  timer = setTimeout(() => { addConfigButton(); }, 500);
 }, false);

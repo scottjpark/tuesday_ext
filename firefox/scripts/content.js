@@ -31,6 +31,14 @@ const addInfoBox = (article, articleImagesFiltered) => {
 
   article.parentNode.appendChild(formBox);
 
+  const statusBox = document.createElement('div');
+  statusBox.className = 'tuesday-config';
+  statusBox.style.fontFamily = fontFamily;
+  statusBox.style.padding = '14px';
+  statusBox.style.margin = '3px 16px 16px 68px';
+  statusBox.style.border = '1px solid #5C6E7E';
+  statusBox.style.borderRadius = '16px';
+
   const artistName = document.createElement('h5');
   artistName.innerText = `Artist: ${artist}`;
   artistName.style.margin = '0px';
@@ -96,6 +104,15 @@ const addInfoBox = (article, articleImagesFiltered) => {
   };
 
   const sendToCurator = () => {
+    // Remove the button and replace with loading bar to prevent button spam
+    const clickedButton = formBox.querySelector('.curation-button')
+    clickedButton.remove()
+    const sendImg = chrome.runtime.getURL('images/loader.webp'); // eslint-disable-line
+    const loader = document.createElement('img')
+    loader.src = sendImg
+    loader.style.width = '20px'
+    formBox.appendChild(loader);
+
     const accessToken = localStorage.getItem('curation_access');
     const url = 'http://localhost:8000/api/curation/save_twitter/';
     fetch(url, {
@@ -108,16 +125,24 @@ const addInfoBox = (article, articleImagesFiltered) => {
     })
       .then((response) => response.json())
       .then((returnData) => {
-        console.log(returnData);
+        formBox.remove()
+        article.parentNode.appendChild(statusBox)
+        statusBox.style.color = 'rgb(50, 205, 50)';
+        statusBox.innerText = returnData
       })
       .catch((error) => {
-        console.error(error);
+        formBox.remove()
+        article.parentNode.appendChild(statusBox)
+        statusBox.style.color = 'rgb(255, 0, 0)';
+        statusBox.innerText = `Something went wrong: ${error}`
       });
   };
 
   const sendButton = document.createElement('div');
+  sendButton.className = 'curation-button'
   sendButton.style.cursor = 'pointer';
-  sendButton.innerText = 'Send';
+  sendButton.innerText = 'Save';
+  sendButton.style.fontSize = '0.8em';
   sendButton.onclick = sendToCurator;
   formBox.appendChild(sendButton);
 };
@@ -167,5 +192,5 @@ document.addEventListener('scroll', () => {
   if (timer !== null) {
     clearTimeout(timer);
   }
-  timer = setTimeout(() => { addConfigButton(); }, 200);
+  timer = setTimeout(() => { addConfigButton(); }, 500);
 }, false);
