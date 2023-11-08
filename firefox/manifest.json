@@ -4,6 +4,11 @@
     "description": "Saves Twitter to DB",
     "manifest_version": 2,
     "author": "Raphire",
+    "browser_specific_settings": {
+        "gecko": {
+            "id": "tuesday_ext@raphire.net"
+        }
+    },
     "icons": {
         "16": "images/icon.png",
         "32": "images/icon.png",

@@ -114,7 +114,7 @@ const addInfoBox = (article, articleImagesFiltered) => {
     formBox.appendChild(loader);
 
     const accessToken = localStorage.getItem('curation_access');
-    const url = 'https://tuesday-production.up.railway.app/pi/curation/save_twitter/';
+    const url = 'https://tuesday-production.up.railway.app/api/curation/save_twitter/';
     fetch(url, {
       method: 'POST',
       headers: {
