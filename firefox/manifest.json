@@ -1,6 +1,6 @@
 {
     "name": "Raphire's Curation",
-    "version": "1.0.0",
+    "version": "2.0.0",
     "description": "Saves Twitter to DB",
     "manifest_version": 2,
     "author": "Raphire",
@@ -22,14 +22,21 @@
     "web_accessible_resources": [
         "images/icon.png",
         "images/share.png",
-        "images/loader.webp"
+        "images/loader.webp",
+        "images/copy.png",
+        "images/success.png",
+        "images/fail.webp"
     ],
     "content_scripts": [
         {
             "js": [
                 "scripts/checkToken.js",
-                "scripts/content.js",
+                "scripts/addOptionBox.js",
+                "scripts/main.js",
                 "scripts/jquery-3.7.1.min.js"
+            ],
+            "css": [
+                "styles/style.css"
             ],
             "matches": [
                 "https://twitter.com/*",
