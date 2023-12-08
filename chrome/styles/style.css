@@ -1,0 +1,74 @@
+.curation-main-wrapper {
+    font-family: TwitterChirp, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    position: absolute;
+    top: 0;
+    left: calc(100% + 2px);
+    z-index: 5;
+    padding: 5px;
+    width: 250px;
+    border: 1px solid #5C6E7E;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.curation-main-wrapper p {
+    margin: 0;
+    padding: 0;
+}
+
+.curation-details-wrapper {
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+}
+
+.curation-details-wrapper p {
+    font-weight: bold;
+    font-size: 1em;
+    margin: 0;
+    width: 100%;
+}
+
+.curation-privacy-wrapper {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+}
+
+.curation-privacy-wrapper div {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.curation-tag-wrapper {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.curation-tag-list-wrapper {
+    display: flex;
+    justify-content: flex-start;
+    align-items: top;
+}
+
+.curation-tag-list {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.curation-tag-list h5 {
+    margin: 0;
+    padding: 0;
+}
+
+.curation-sendbutton {
+    cursor: pointer;
+}
