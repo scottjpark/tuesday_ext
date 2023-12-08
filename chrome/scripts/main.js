@@ -1,62 +1,3 @@
-// const addInfoBox = (article, articleImagesFiltered) => {
-
-//   // Organize the data to be sent
-//   const imgURLs = [];
-//   for (let i = 0; i < articleImagesFiltered.length; i += 1) {
-//     const { currentSrc } = articleImagesFiltered[i];
-//     currentSrc.replace('small', 'large');
-//     imgURLs.push(currentSrc);
-//   }
-
-//   const data = {
-//     urls: imgURLs,
-//     tags: hashTags,
-//     name: artist.replace('@', ''),
-//     displayName,
-//     tweetURL,
-//   };
-
-//   const sendToCurator = () => {
-//     // Remove the button and replace with loading bar to prevent button spam
-//     const clickedButton = formBox.querySelector('.curation-button');
-//     clickedButton.remove();
-//     const sendImg = chrome.runtime.getURL('images/loader.webp'); // eslint-disable-line
-//     const loader = document.createElement('img');
-//     loader.src = sendImg;
-//     loader.style.width = '20px';
-//     formBox.appendChild(loader);
-
-//     const accessToken = localStorage.getItem('curation_access');
-//     const url = 'https://tuesday-production.up.railway.app/api/curation/save_twitter/';
-//     fetch(url, {
-//       method: 'POST',
-//       headers: {
-//         'Content-Type': 'application/json',
-//         Authorization: `Bearer ${accessToken}`,
-//       },
-//       body: JSON.stringify(data),
-//     })
-//       .then((response) => response.json())
-//       .then((returnData) => {
-//         formBox.remove();
-//         article.parentNode.appendChild(statusBox);
-//         statusBox.style.color = 'rgb(50, 205, 50)';
-//         statusBox.innerText = returnData;
-//       })
-//       .catch((error) => {
-//         formBox.remove();
-//         article.parentNode.appendChild(statusBox);
-//         statusBox.style.color = 'rgb(255, 0, 0)';
-//         statusBox.innerText = `Something went wrong: ${error}`;
-//       });
-//   };
-
-
-//   sendButton.style.fontSize = '0.8em';
-//   sendButton.onclick = sendToCurator;
-//   formBox.appendChild(sendButton);
-// };
-
 const addConfigButton = () => {
   // Check all loaded tweets
   const articles = document.querySelectorAll('article');
@@ -76,21 +17,23 @@ const addConfigButton = () => {
         e.preventDefault();
         const existingFormBoxes = article.querySelectorAll('form.tuesday-config');
         if (!(existingFormBoxes.length > 0)) {
-          addInfoBox(article, articleImagesFiltered);
+          addInfoBox(article, articleImagesFiltered); // eslint-disable-line no-undef
         }
       };
 
       if (articleImagesFiltered.length > 0) {
         // Place config button
         const sendImg = chrome.runtime.getURL('images/share.png'); // eslint-disable-line
-        const groupElements = article.querySelector('div[role="group"]');
+        const articleDots = article.querySelector('div[data-testid="caret"]');
         const configButton = document.createElement('img');
-        configButton.style.height = '1.5em';
-        configButton.style.padding = '0 0 0 2em';
+        configButton.style.height = '2em';
+        configButton.style.margin = '0 0 0 0.8em';
+        configButton.style.borderRadius = '50%';
         configButton.src = sendImg;
         configButton.className = 'tuesday_curate_button';
+        configButton.style.border = `1px solid ${borderColor}`; // eslint-disable-line no-undef
         configButton.onclick = updatePopup;
-        groupElements.appendChild(configButton);
+        articleDots.parentElement.appendChild(configButton);
       }
     }
   });
