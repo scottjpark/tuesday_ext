@@ -9,7 +9,7 @@ const checkAccessToken = async () => {
     token: accessToken,
   };
 
-  const tokenStatus = await $.ajax({
+  const tokenStatus = await $.ajax({ // eslint-disable-line no-undef
     method: 'POST',
     url,
     data,
@@ -73,7 +73,7 @@ const addLoginFields = () => {
 
     const url = 'https://tuesday-production.up.railway.app/api/users/token/';
 
-    $.post(url, userData).done((response) => {
+    $.post(url, userData).done((response) => { // eslint-disable-line no-undef
       if (response.access) {
         localStorage.setItem('curation_access', response.access);
         setStatusFields(true);

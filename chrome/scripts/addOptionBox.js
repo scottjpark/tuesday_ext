@@ -41,7 +41,17 @@ const addInfoBox = (article, articleImagesFiltered) => { // eslint-disable-line 
   const displayName = userNameLinks[0].innerText;
   const textBody = article.innerText;
   const hashTags = textBody.match(/#[\p{L}\d_]+/gu) || [];
-  const tweetURL = article.querySelectorAll('a')[3].href;
+
+  let tweetURL;
+  // Handle weird edge case for tweet link location
+  const links = article.querySelectorAll('a');
+  links.forEach((link) => {
+    if (window.location.toString().match(link.href)) {
+      tweetURL = window.location.toString();
+    } else {
+      tweetURL = article.querySelectorAll('a')[3].href;
+    }
+  });
 
   // THE BOX
   const mainOptionsWrapper = document.createElement('form');
@@ -155,7 +165,7 @@ const addInfoBox = (article, articleImagesFiltered) => { // eslint-disable-line 
     // Remove the button and replace with loading bar to prevent button spam
     const clickedButton = mainOptionsWrapper.querySelector('.curation-sendbutton');
     clickedButton.remove();
-          const sendImg = chrome.runtime.getURL('images/loader.webp'); // eslint-disable-line
+    const sendImg = chrome.runtime.getURL('images/loader.webp'); // eslint-disable-line
     const loader = document.createElement('img');
     loader.src = sendImg;
     loader.style.width = '20px';
