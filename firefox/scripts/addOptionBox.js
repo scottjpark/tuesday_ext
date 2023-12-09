@@ -49,7 +49,7 @@ const addInfoBox = (article, articleImagesFiltered) => { // eslint-disable-line 
     if (window.location.toString().match(link.href)) {
       tweetURL = window.location.toString();
     } else {
-      tweetURL = article.querySelectorAll('a')[3].href;
+      tweetURL = userNameLinks[2].href;
     }
   });
 
