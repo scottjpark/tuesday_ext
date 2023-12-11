@@ -2,6 +2,7 @@ const addConfigButton = () => {
   // Check all loaded tweets
   const articles = document.querySelectorAll('article');
   articles.forEach((article) => {
+    addCopyButton(article); // eslint-disable-line no-undef
     const articleImages = article.querySelectorAll('img');
     if (articleImages.length > 1 && article.querySelectorAll('.tuesday_curate_button').length === 0) {
       // Check to see if the tweet contains an image, other than the avatar

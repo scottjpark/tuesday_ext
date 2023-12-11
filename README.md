@@ -2,14 +2,5 @@
 
 A Chrome extension to easily save images on twitter to my personal gallery.
 
-## Twitter Support
-
-Sends scraped data to the Tuesday backend server via jQuery Ajax.
-
-### checkToken.js
-
-Handles authentication/token handling for the backend server. Checks to see if access token exists, and sets the status/login fields.
-
-### content.js
-
-Handles the image detection and image formatting on the twitter feed.
+## To Do
+- Set update link https://extensionworkshop.com/documentation/manage/updating-your-extension/?utm_source=addons.mozilla.org&utm_medium=referral&utm_content=submission

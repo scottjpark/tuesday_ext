@@ -59,6 +59,44 @@ const setStatusFields = (status) => {
   }
 };
 
+const setGlobalConfigs = () => {
+  const defaultBehaviorWrapper = document.createElement('div');
+  defaultBehaviorWrapper.className = 'curation-global-behavior-wrapper';
+
+  const navBar = document.querySelector('header div div div div');
+  navBar.appendChild(defaultBehaviorWrapper);
+
+  // NSFW
+  const nsfwGlobalInputWrapper = document.createElement('div');
+  nsfwGlobalInputWrapper.className = 'curation-global-config-nsfw';
+
+  const nsfwGlobalLabel = document.createElement('p');
+  nsfwGlobalLabel.innerText = 'NSFW: ';
+
+  const nsfwGlobalInput = document.createElement('input');
+  nsfwGlobalInput.type = 'checkbox';
+  nsfwGlobalInput.checked = globalConfig.nsfw; // eslint-disable-line no-undef
+
+  nsfwGlobalInputWrapper.appendChild(nsfwGlobalLabel);
+  nsfwGlobalInputWrapper.appendChild(nsfwGlobalInput);
+  defaultBehaviorWrapper.appendChild(nsfwGlobalInputWrapper);
+
+  // Private
+  const privacyGlobalInputWrapper = document.createElement('div');
+  privacyGlobalInputWrapper.className = 'curation-global-config-private';
+
+  const privacyGlobalLabel = document.createElement('p');
+  privacyGlobalLabel.innerText = 'Private: ';
+
+  const privacyGlobalInput = document.createElement('input');
+  privacyGlobalInput.type = 'checkbox';
+  privacyGlobalInput.checked = globalConfig.private; // eslint-disable-line no-undef
+
+  privacyGlobalInputWrapper.appendChild(privacyGlobalLabel);
+  privacyGlobalInputWrapper.appendChild(privacyGlobalInput);
+  defaultBehaviorWrapper.appendChild(privacyGlobalInputWrapper);
+};
+
 const addLoginFields = () => {
   // Data Handling
   const handleFormSubmit = (e) => {
@@ -161,7 +199,9 @@ const intervalId = setInterval(async () => {
   if (document.readyState === 'complete' && typeof tokenStatus === 'boolean') {
     clearInterval(intervalId);
     setStatusFields(tokenStatus);
-    if (!tokenStatus) {
+    if (tokenStatus) {
+      setGlobalConfigs();
+    } else {
       addLoginFields();
     }
   }

@@ -1,31 +1,17 @@
-const successIcon = chrome.runtime.getURL('images/success.png'); // eslint-disable-line
-const failIcon = chrome.runtime.getURL('images/fail.webp'); // eslint-disable-line
-const copyIcon = chrome.runtime.getURL('images/copy.png'); // eslint-disable-line
-
-const bgColor = document.body.style.backgroundColor;
-let borderColor;
-if (bgColor === 'rgb(255, 255, 255)') {
-  borderColor = 'rgba(239, 243, 244, 1.00)';
-} else if (bgColor === 'rgb(0, 0, 0)') {
-  borderColor = 'rgb(47, 51, 54)';
-} else {
-  borderColor = 'rgb(56, 68, 77)';
-}
-
 const addStatusBox = (article, status) => {
   const existingStatus = article.parentElement.querySelectorAll('.curation-main-status');
   if (existingStatus.length > 0) return;
 
   const mainStatusWrapper = document.createElement('div');
   mainStatusWrapper.className = 'curation-main-status';
-  mainStatusWrapper.style.backgroundColor = bgColor;
-  mainStatusWrapper.style.borderColor = borderColor;
+  mainStatusWrapper.style.backgroundColor = bgColor; // eslint-disable-line no-undef
+  mainStatusWrapper.style.borderColor = borderColor; // eslint-disable-line no-undef
   article.parentElement.appendChild(mainStatusWrapper);
 
   const statusImg = document.createElement('img');
   statusImg.className = 'curation-status-img';
   mainStatusWrapper.appendChild(statusImg);
-  statusImg.src = status ? successIcon : failIcon;
+  statusImg.src = status ? successIcon : failIcon; // eslint-disable-line no-undef
 };
 
 const addInfoBox = (article, articleImagesFiltered) => { // eslint-disable-line no-unused-vars
@@ -48,16 +34,17 @@ const addInfoBox = (article, articleImagesFiltered) => { // eslint-disable-line 
   links.forEach((link) => {
     if (window.location.toString().match(link.href)) {
       tweetURL = window.location.toString();
-    } else {
-      tweetURL = userNameLinks[2].href;
     }
   });
+  if (typeof (tweetURL) !== 'string' && userNameLinks.length > 1) {
+    tweetURL = userNameLinks[2].href;
+  }
 
   // THE BOX
   const mainOptionsWrapper = document.createElement('form');
   mainOptionsWrapper.className = 'curation-main-wrapper';
-  mainOptionsWrapper.style.backgroundColor = bgColor;
-  mainOptionsWrapper.style.borderColor = borderColor;
+  mainOptionsWrapper.style.backgroundColor = bgColor; // eslint-disable-line no-undef
+  mainOptionsWrapper.style.borderColor = borderColor; // eslint-disable-line no-undef
   article.parentElement.appendChild(mainOptionsWrapper);
 
   //   Display Box Status
@@ -85,7 +72,8 @@ const addInfoBox = (article, articleImagesFiltered) => { // eslint-disable-line 
   nsfwLabel.innerText = 'NSFW: ';
   const nsfwInput = document.createElement('input');
   nsfwInput.type = 'checkbox';
-  nsfwInput.checked = true;
+  const nsfwCheckStatus = document.querySelector('.curation-global-config-nsfw input').checked;
+  nsfwInput.checked = nsfwCheckStatus !== 'undefined' ? nsfwCheckStatus : true;
   nsfwInputWrapper.appendChild(nsfwLabel);
   nsfwInputWrapper.appendChild(nsfwInput);
   privacyWrapper.appendChild(nsfwInputWrapper);
@@ -96,7 +84,8 @@ const addInfoBox = (article, articleImagesFiltered) => { // eslint-disable-line 
   privateImageLabel.innerText = 'Private: ';
   const privateImage = document.createElement('input');
   privateImage.type = 'checkbox';
-  privateImage.checked = true;
+  const privacyCheckStatus = document.querySelector('.curation-global-config-private input').checked;
+  privateImage.checked = privacyCheckStatus !== 'undefined' ? privacyCheckStatus : true;
   privateImageWrapper.appendChild(privateImageLabel);
   privateImageWrapper.appendChild(privateImage);
   privacyWrapper.appendChild(privateImageWrapper);
@@ -128,8 +117,8 @@ const addInfoBox = (article, articleImagesFiltered) => { // eslint-disable-line 
   const tagInputBox = document.createElement('input');
   tagInputBox.type = 'text';
   tagInputBox.className = 'curation-tag-input';
-  tagInputBox.addEventListener('keypress', (e) => {
-    if (e.code === 'Enter' || e.code === 'Comma') {
+  tagInputBox.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ',' || e.key === 'Tab') {
       e.preventDefault();
       const tag = document.createElement('h5');
       tag.innerText = e.target.value;
@@ -197,18 +186,6 @@ const addInfoBox = (article, articleImagesFiltered) => { // eslint-disable-line 
   const actionWrapper = document.createElement('div');
   actionWrapper.className = 'curation-action-wrapper';
   mainOptionsWrapper.appendChild(actionWrapper);
-
-  //   URL Copy Button
-  const copyButton = document.createElement('img');
-  copyButton.className = 'curation-copyicon';
-  copyButton.src = copyIcon;
-  const newTweetURL = tweetURL.replace(/(?:x\.com|twitter\.com)/g, 'vxtwitter.com');
-  copyButton.onclick = () => {
-    copyButton.style.opacity = '0.3';
-    navigator.clipboard.writeText(newTweetURL);
-  };
-
-  actionWrapper.appendChild(copyButton);
 
   // Save Button
   const sendButton = document.createElement('button');
