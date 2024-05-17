@@ -1,0 +1,23 @@
+.curation-global-behavior-wrapper {
+    font-family: TwitterChirp, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 233px;
+    margin: 0;
+    padding: 0;
+}
+
+.curation-global-behavior-wrapper div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 5px;
+    padding: 0;
+}
+
+.curation-global-behavior-wrapper p {
+    margin: 0;
+    padding: 0;
+    font-size: 0.8em
+}

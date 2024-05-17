@@ -1,7 +1,7 @@
 {
     "name": "Raphire's Curation",
-    "version": "2.1.0",
-    "description": "Saves Twitter to DB",
+    "version": "3.0.0",
+    "description": "Custom extension for interacting with a personal service website",
     "manifest_version": 2,
     "author": "Raphire",
     "browser_specific_settings": {
@@ -10,39 +10,43 @@
         }
     },
     "icons": {
-        "16": "images/icon.png",
-        "32": "images/icon.png",
-        "48": "images/icon.png",
-        "128": "images/icon.png"
+        "16": "resources/icon.png",
+        "32": "resources/icon.png",
+        "48": "resources/icon.png",
+        "128": "resources/icon.png"
     },
     "permissions": [
-        "https://tuesday-production.up.railway.app/*"
+        "https://tuesday-production.up.railway.app/*",
+        "https://tuesday.raphire.net/*"
     ],
     "content_security_policy": "sandbox allow-scripts allow-forms allow-popups allow-modals;script-src 'self' 'unsafe-eval'; object-src 'self';",
     "web_accessible_resources": [
-        "images/icon.png",
-        "images/share.png",
-        "images/loader.webp",
-        "images/copy.png",
-        "images/success.png",
-        "images/fail.webp"
+        "resources/icon.png",
+        "resources/share.png",
+        "resources/loader.webp",
+        "resources/copy.png",
+        "resources/success.png",
+        "resources/fail.webp"
     ],
     "content_scripts": [
         {
             "js": [
-                "scripts/jquery-3.7.1.min.js",
-                "scripts/settings.js",
-                "scripts/addCopyButton.js",
-                "scripts/checkToken.js",
-                "scripts/addOptionBox.js",
+                "scripts/common/jquery-3.7.1.min.js",
+                "scripts/common/constants.js",
+                "scripts/common/auth.js",
+                "scripts/twitter/main.js",
+                "scripts/twitter/actions.js",
                 "scripts/main.js"
             ],
             "css": [
-                "styles/style.css"
+                "styles/common.css",
+                "styles/twitter.css"
             ],
             "matches": [
                 "https://twitter.com/*",
-                "https://x.com/*"
+                "https://x.com/*",
+                "https://youtube.com/*",
+                "https://www.youtube.com/*"
             ],
             "run_at": "document_idle"
         }
